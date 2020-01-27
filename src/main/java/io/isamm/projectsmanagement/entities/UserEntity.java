@@ -8,9 +8,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
@@ -28,8 +26,7 @@ public class UserEntity extends GenericEntity {
 	@JoinColumn(nullable = false)
 	private ProfileTypeEnum profileType;
 	
-	@NotNull
-	@Email
+	@NotBlank
 	@Column(nullable = false, unique = true)
 	private String email;
 	

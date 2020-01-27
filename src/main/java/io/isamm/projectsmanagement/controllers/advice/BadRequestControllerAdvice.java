@@ -17,9 +17,11 @@ import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import io.isamm.projectsmanagement.dtos.ErrorResponseDto;
 import io.isamm.projectsmanagement.exceptions.BadRequestException;
 import io.isamm.projectsmanagement.exceptions.ForeignKeyIntegrityViolationException;
+import io.isamm.projectsmanagement.exceptions.InvalidEmailAddressException;
 import io.isamm.projectsmanagement.exceptions.JsonPatchException;
 import io.isamm.projectsmanagement.exceptions.MissingRequiredArgumentException;
 import io.isamm.projectsmanagement.exceptions.UniqueConstraintViolationException;
+import io.isamm.projectsmanagement.exceptions.WeakPasswordException;
 
 
 @ControllerAdvice
@@ -48,6 +50,12 @@ public class BadRequestControllerAdvice {
 		} else if (badRequestException instanceof JsonPatchException) {
 			errorResponseDto.setStatus(HttpStatus.BAD_REQUEST.value());
 			errorResponseDto.setMessage("The supplied JSON patch operations sequence is malformed or cannot be applied to the JSON document");
+		} else if (badRequestException instanceof InvalidEmailAddressException) {
+			errorResponseDto.setStatus(HttpStatus.BAD_REQUEST.value());
+			errorResponseDto.setMessage("Invalid email address");
+		} else if (badRequestException instanceof WeakPasswordException) {
+			errorResponseDto.setStatus(HttpStatus.BAD_REQUEST.value());
+			errorResponseDto.setMessage("Password must have an 8 characters length at least, containing lower and upper case letters, digits and special characters");
 		} else {
 			errorResponseDto.setStatus(HttpStatus.BAD_REQUEST.value());
 			errorResponseDto.setMessage("Bad request");
