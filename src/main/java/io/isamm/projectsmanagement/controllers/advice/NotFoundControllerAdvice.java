@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import io.isamm.projectsmanagement.dtos.ErrorResponseDto;
+import io.isamm.projectsmanagement.exceptions.AccountNotFoundException;
 import io.isamm.projectsmanagement.exceptions.NotFoundException;
 import io.isamm.projectsmanagement.exceptions.ResourceNotFoundException;
 
@@ -31,6 +32,9 @@ public class NotFoundControllerAdvice {
 		if (notFoundException instanceof ResourceNotFoundException) {
 			ResourceNotFoundException resourceNotFoundException = (ResourceNotFoundException) notFoundException;
 			errorResponseDto.setMessage("No record was found for the given id: " + resourceNotFoundException.getId());
+		} else if (notFoundException instanceof AccountNotFoundException) {
+			AccountNotFoundException accountNotFoundException = (AccountNotFoundException) notFoundException;
+			errorResponseDto.setMessage("No account was found for the given email: " + accountNotFoundException.getEmail());
 		} else {
 			errorResponseDto.setMessage("Not found");
 		}

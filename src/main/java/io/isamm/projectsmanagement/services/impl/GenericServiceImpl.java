@@ -33,17 +33,14 @@ import io.isamm.projectsmanagement.utils.JsonPatchUtil;
 
 public class GenericServiceImpl<T extends GenericEntity> implements GenericService<T> {
 
-	private final JpaRepository<T, String> repository;
-	private final ObjectMapper objectMapper;
-	private final Validator validator;
+	@Autowired
+	private JpaRepository<T, String> repository;
 	
 	@Autowired
-	public GenericServiceImpl(JpaRepository<T, String> repository, ObjectMapper objectMapper, Validator validator) {
-		super();
-		this.repository = repository;
-		this.objectMapper = objectMapper;
-		this.validator = validator;
-	}
+	private ObjectMapper objectMapper;
+	
+	@Autowired
+	private Validator validator;
 
 	@Override
 	public T findById(String id) {
