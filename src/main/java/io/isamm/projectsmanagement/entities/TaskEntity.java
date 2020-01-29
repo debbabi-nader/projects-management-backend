@@ -22,10 +22,6 @@ public class TaskEntity extends GenericEntity {
 	@Column(nullable = false)
 	private String reference;
 	
-	@NotBlank
-	@Column(nullable = false)
-	private String description;
-	
 	@NotNull
 	@ManyToOne(optional = false)
 	@JoinColumn(nullable = false)
@@ -35,10 +31,9 @@ public class TaskEntity extends GenericEntity {
 		super();
 	}
 
-	public TaskEntity(String id, String reference, String description, ProjectEntity project, LocalDateTime createdAt, LocalDateTime updatedAt) {
+	public TaskEntity(String id, String reference, ProjectEntity project, LocalDateTime createdAt, LocalDateTime updatedAt) {
 		super(id, createdAt, updatedAt);
 		this.reference = reference;
-		this.description = description;
 		this.project = project;
 	}
 
@@ -48,14 +43,6 @@ public class TaskEntity extends GenericEntity {
 
 	public void setReference(String reference) {
 		this.reference = reference;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 	public ProjectEntity getProject() {

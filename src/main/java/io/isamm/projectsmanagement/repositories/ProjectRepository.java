@@ -13,7 +13,7 @@ import io.isamm.projectsmanagement.entities.ProjectEntity;
 @Repository
 public interface ProjectRepository extends JpaRepository<ProjectEntity, String> {
 
-	@Query("SELECT project FROM ProjectEntity AS project WHERE project.manager.id LIKE :id")
+	@Query("SELECT project FROM ProjectEntity AS project WHERE project.manager.id LIKE :id ORDER BY task.createdAt DESC")
 	public Collection<ProjectEntity> getProjectsByManagerId(@Param("id") String id);
 
 }

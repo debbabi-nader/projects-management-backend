@@ -51,6 +51,6 @@ public class ProjectController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public void deleteProject(@PathVariable(value = "id", required = true) String id) {
 		this.projectService.delete(id);
-	};
+	}
 	
 }
